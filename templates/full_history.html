@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Full History
+{% endblock %}
+
+{% block main %}
+    <h1>Full History</h1>
+    <!--Bootstrap table with category, description, amount spent, date, and notes-->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount Spent</th>
+                <th>Date</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <!--creates a new row for each element in the "history" list-->
+        {% for i in history %}
+            <tr class="colorcode" title="{{i["category"]}}">
+                <td>{{ i["category"] }}</td>
+                <td>{{ i["description"] }}</td>
+                <td>{{ i["expense"] }}</td>
+                <td>{{ i["date"] }}</td>
+                <td>{{ i["notes"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <!--Color codes the table based on category-->
+    <script>
+        var code = {
+                "Food": "#aff8db",
+                "Transportation": "#a79aff",
+                "Clothing": "#f6a6ff",
+                "Entertainment": "#fff5ba",
+                "School": "#ffabab",
+                "Health": "#85e3ff",
+                "Technology": "#bffcc6",
+                "Other": "#e7ffac"
+            };
+        var rows = document.getElementsByClassName("colorcode");
+
+        for (var i = 0; i < rows.length; i++)
+        {
+            var category = rows[i].getAttribute("title");
+            var color = code[category];
+            rows[i].style.backgroundColor = color;
+        }
+    </script>
+{% endblock %}

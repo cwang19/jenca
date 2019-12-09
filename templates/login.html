@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+<!-- Creates form for login -->
+    <form action="/login" method="post">
+        <!-- Jumbotron links to register page for new users -->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Login</h1>
+                <p class="text-center">First time here? Click <a href="/register">here</a> to register for a new account.</p>
+            </div>
+        </div>
+
+        <!-- Login form: username, password -->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+{% endblock %}

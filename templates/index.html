@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
+{% block main %}
+
+    <!--Jumbotron at top of page that displays pie chart, budget, how much spent total, and balance left-->
+    <div class="rounded-circle">
+        <div class="jumbotron jumbotron-fluid" id="cont">
+            <div class="container">
+                <h1 class="display-4">Monthly Overview</h1>
+                <p class="linky">
+                <a href="/history" class="card-link">Monthly History</a>
+                <table class="lead">
+                    <tr>
+                        <td><b>Monthly Budget:</b> {{ monthlybudget }}
+                            <br>
+                            <br>
+                            <b>Spent This Month:</b> {{ spent }}
+                            <br>
+                            <br>
+                            <b id="left" title="{{left}}">Amount Left:</b> {{ left }}
+                        </td>
+
+                        <!-- Pie Chart -->
+                        <!--from https://blog.ruanbekker.com/blog/2017/12/14/graphing-pretty-charts-with-python-flask-and-chartjs/-->
+                        <td><canvas id="chart" width="500" height="300"></canvas></td>
+
+                        <!--defines pie chart-->
+                        <script>
+                          var pieData = [
+                            {% for item, label, colors in set %}
+                              {
+                                value: {{ item }},
+                                label: "{{label}}",
+                                color : "{{colors}}"
+                              },
+                            {% endfor %}
+                          ];
+                          new Chart(document.getElementById("chart").getContext("2d")).Pie(pieData);
+                        </script>
+                    </tr>
+                </table>
+                </p>
+              </div>
+        </div>
+    </div>
+
+    <!-- Changes jumbotron background color to red when overdrawn -->
+    <script>
+        var container = document.getElementById("cont");
+        var str = document.getElementById("left").getAttribute("title");
+        var amt = parseInt(str.substring(1, str.length), 10);
+        if (amt < 0)
+        {
+            container.style.backgroundColor = "#FFA794";
+        }
+    </script>
+
+    <!-- Creates cards for each category -->
+    <div class="card-deck">
+
+        {% for item in category_expenses %}
+        <div class="col-md-6 col-lg-6 mt-2">
+            <div class="col mb-4 rounded-circle">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item["category"] }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ item["total"] }}</h6>
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Date</th>
+                            <th>Cost</th>
+                            <th>Description</th>
+                        </thead>
+                        {% for expense in item["recent"] %}
+                            <tr>
+                                <td>
+                                    {{ expense["date"] }}
+                                </td>
+                                <td>
+                                    ${{ expense["cost"] }}
+                                </td>
+                                <td>
+                                    {{ expense["description"] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                    <p class="card-text" title="{{item["percentage"]}}">You have spent {{ item["percentage"] }} of your budget on {{ item["category"] }} this month.</p>
+                    <a href="/month_history/{{item["category"]}}" class="card-link">View More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Changes saturation of card background depending on percentage spent in that categort -->
+    <script>
+        var cards = document.getElementsByClassName("card-body");
+        var percentages = document.getElementsByClassName("card-text");
+        for (var i = 0; i < cards.length; i++)
+        {
+            var str = percentages[i].getAttribute("title");
+            if (parseInt(str) == 0)
+            {
+                cards[i].style.backgroundColor = "#D3D3D3";
+            }
+            else
+            {
+                var percentage = parseInt(str.substring(0, str.length-1), 10);
+                cards[i].style.backgroundColor = "#77dd77";
+                cards[i].style.filter = "saturate(" + percentage + "%)";
+            }
+        }
+    </script>
+
+{% endblock %}

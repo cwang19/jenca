@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Change Budget
+{% endblock %}
+
+{% block main %}
+<!--Display for current budget-->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Change your monthly budget</h1>
+            <p class="lead text-center">Your current monthly budget is {{ current }}.</p>
+        </div>
+    </div>
+<!--Form for changing budget: Budget, Confirmation-->
+        <form action="/changebudget" method="post">
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="budget" placeholder="Change Monthly Budget" type="number" step="0.01">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="confirmation" placeholder="Confirm: Change Budget" type="number" step="0.01">
+            </div>
+            <button class="btn btn-primary" type="submit">Change Budget</button>
+        </form>
+{% endblock %}

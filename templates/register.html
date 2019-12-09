@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <!--allows users to register for an account-->
+    <form action="/register" method="post">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Register</h1>
+                <p class="text-center">Already have an account? Click <a href="/login">here</a> to sign in.</p>
+            </div>
+        </div>
+
+        <!--collects users' username, budget, password, and confirmation-->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="budget" placeholder="Monthly Budget" type="number" step="0.01">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <p>Note: password must be at least 5 characters long and contain at least 1 number and 1 special character</p>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+{% endblock %}

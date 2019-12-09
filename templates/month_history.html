@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Monthly History
+{% endblock %}
+
+{% block main %}
+    <h1>Monthly History</h1>
+    <!--Bootstrap table-->
+    <!-- Creates table for history sorted by category, so only transactions for a certain category are displayed here; no need for color coding -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount Spent</th>
+                <th>Date</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        {% for i in history %}
+            <tr>
+                <td>{{ i["category"] }}</td>
+                <td>{{ i["description"] }}</td>
+                <td>{{ i["expense"] }}</td>
+                <td>{{ i["date"] }}</td>
+                <td>{{ i["notes"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

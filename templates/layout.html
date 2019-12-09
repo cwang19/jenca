@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="/static/styles.css" rel="stylesheet">
+        <link rel="icon" href="https://thumbs.dreamstime.com/t/green-bag-money-dollar-sign-2292307.jpg" type="image/jgg">
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
+        <title>JenCa: {% block title %}{% endblock %}</title>
+
+        {% block script %}{% endblock %}
+
+    </head>
+
+<!-- Navigation Bar Code -->
+    <body>
+        <nav class="navbar navbar-expand-md navbar-light border">
+            <a class="navbar-brand" href="/"><span class="lighter">Jen</span><span class="darker">Ca</span></a>
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                {% if session.user_id %}
+                    <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/new_expense">Log Expense/More Money</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/changebudget">Change Budget</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/full_history">History</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
+
+        <main class="container p-5">
+            {% block main %}{% endblock %}
+        </main>
+    </body>
+
+</html>

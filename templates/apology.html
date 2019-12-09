@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+<!-- Displays apology message in a jumbotron depending on error -->
+    <div class="jumbotron">
+      <h1 class="display-4">Error {{ code }}</h1>
+      <p class="lead text-center">{{ message }}</p>
+      <hr class="my-4">
+      <p>Please hit the "back" button and try again!</p>
+    </div>
+{% endblock %}
