@@ -1,5 +1,8 @@
 # JenCa Documentation
 
+## Check out the website here!
+http://jenca.herokuapp.com/
+
 ## General Overview and Compiling
 JenCa was created in the CS50 IDE. To run the project, open a new terminal in the CS50 IDE and navigate to the ```jenca/``` directory. Within the ```jenca/``` directory, run the command ```flask run``` to start Flask's built-in web server. The JenCa web application will open in a new tab.
 
