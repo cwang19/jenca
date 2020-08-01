@@ -1,6 +1,6 @@
 # JenCa Documentation
 
-## Check out the website here!
+## Try JenCa here!
 http://jenca.herokuapp.com/
 
 ## General Overview and Compiling
